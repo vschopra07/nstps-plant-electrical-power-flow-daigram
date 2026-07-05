@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Plant Power Supply Scheme</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="sld-wrapper">
+    <header class="sld-header">
+        <h2>NSTPS (3 X 660 MW): COMPLETE INTEGRATED POWER SUPPLY SYSTEM</h2>
+        <p>Click on any Bus Bar block to inspect its local circuit breaker feeders.</p>
+    </header>
+
+    <div class="diagram-container">
+        <svg viewBox="0 0 800 900" class="sld-svg">
+            <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#00ffcc"/>
+                </marker>
+            </defs>
+
+            <circle cx="400" cy="50" r="22" class="svg-gen"/>
+            <text x="400" y="55" class="svg-text gen-text">Y</text>
+            <text x="400" y="85" class="svg-subtext">Gen (22 KV)</text>
+
+            <path d="M 378 50 H 150 V 110" class="flow-line"/>
+            <path d="M 422 50 H 650 V 110" class="flow-line"/>
+            <path d="M 390 72 V 115 H 310 V 135" class="flow-line"/>
+            <path d="M 410 72 V 115 H 490 V 135" class="flow-line"/>
+
+            <circle cx="150" cy="120" r="12" class="svg-xfmr"/><circle cx="150" cy="134" r="12" class="svg-xfmr"/>
+            <text x="95" y="130" class="svg-subtext">UT-A (35MVA)</text>
+            
+            <circle cx="650" cy="120" r="12" class="svg-xfmr"/><circle cx="650" cy="134" r="12" class="svg-xfmr"/>
+            <text x="705" y="130" class="svg-subtext">UT-B (35MVA)</text>
+
+            <circle cx="310" cy="145" r="10" class="svg-xfmr"/><circle cx="310" cy="157" r="10" class="svg-xfmr"/>
+            <circle cx="490" cy="145" r="10" class="svg-xfmr"/><circle cx="490" cy="157" r="10" class="svg-xfmr"/>
+
+            <path d="M 150 146 V 190" class="flow-line"/>
+            <path d="M 650 146 V 190" class="flow-line"/>
+            <path d="M 310 167 V 220" class="flow-line"/>
+            <path d="M 490 167 V 220" class="flow-line"/>
+
+            <rect x="90" y="190" width="180" height="18" class="svg-bus red-bus" onclick="toggleBusFeeders('UA')"/>
+            <text x="180" y="203" class="bus-text" onclick="toggleBusFeeders('UA')">UA (11 KV)</text>
+
+            <rect x="530" y="190" width="180" height="18" class="svg-bus red-bus" onclick="toggleBusFeeders('UB')"/>
+            <text x="620" y="203" class="bus-text" onclick="toggleBusFeeders('UB')">UB (11 KV)</text>
+
+            <rect x="250" y="220" width="110" height="16" class="svg-bus purple-bus" onclick="toggleBusFeeders('UAA-A')"/>
+            <text x="305" y="232" class="bus-text sub-text" onclick="toggleBusFeeders('UAA-A')">UAA-A (3.3KV)</text>
+
+            <rect x="440" y="220" width="110" height="16" class="svg-bus purple-bus" onclick="toggleBusFeeders('UAA-B')"/>
+            <text x="495" y="232" class="bus-text sub-text" onclick="toggleBusFeeders('UAA-B')">UAA-B (3.3KV)</text>
+
+
+            <path d="M 130 208 V 290" class="load-drop"/>
+            <circle cx="130" cy="300" r="10" class="svg-xfmr"/><circle cx="130" cy="312" r="10" class="svg-xfmr"/>
+            <path d="M 130 322 V 350" class="load-drop"/>
+
+            <path d="M 670 208 V 290" class="load-drop"/>
+            <circle cx="670" cy="300" r="10" class="svg-xfmr"/><circle cx="670" cy="312" r="10" class="svg-xfmr"/>
+            <path d="M 670 322 V 350" class="load-drop"/>
+
+            <rect x="90" y="350" width="260" height="18" class="svg-bus blue-bus" onclick="toggleBusFeeders('USS-A')"/>
+            <text x="220" y="363" class="bus-text" onclick="toggleBusFeeders('USS-A')">USS-A (12.5 M LT Switchgear)</text>
+
+            <rect x="450" y="350" width="260" height="18" class="svg-bus blue-bus" onclick="toggleBusFeeders('USS-B')"/>
+            <text x="580" y="363" class="bus-text" onclick="toggleBusFeeders('USS-B')">USS-B (12.5 M LT Switchgear)</text>
+
+            <path d="M 160 208 V 430" class="load-drop"/>
+            <circle cx="160" cy="440" r="10" class="svg-xfmr"/><circle cx="160" cy="452" r="10" class="svg-xfmr"/>
+            <path d="M 160 462 V 490" class="load-drop"/>
+
+            <path d="M 640 208 V 430" class="load-drop"/>
+            <circle cx="640" cy="440" r="10" class="svg-xfmr"/><circle cx="640" cy="452" r="10" class="svg-xfmr"/>
+            <path d="M 640 462 V 490" class="load-drop"/>
+
+            <rect x="90" y="490" width="260" height="18" class="svg-bus blue-bus" onclick="toggleBusFeeders('USS-C')"/>
+            <text x="220" y="503" class="bus-text" onclick="toggleBusFeeders('USS-C')">USS-C (27 M LT Switchgear)</text>
+
+            <rect x="450" y="490" width="260" height="18" class="svg-bus blue-bus" onclick="toggleBusFeeders('USS-D')"/>
+            <text x="580" y="503" class="bus-text" onclick="toggleBusFeeders('USS-D')">USS-D (27 M LT Switchgear)</text>
+
+
+            <path d="M 190 208 V 580" class="load-drop"/>
+            <circle cx="190" cy="590" r="9" class="svg-xfmr"/><circle cx="190" cy="600" r="9" class="svg-xfmr"/>
+            <path d="M 190 609 V 630" class="load-drop"/>
+
+            <rect x="90" y="630" width="620" height="18" class="svg-bus blue-bus" onclick="toggleBusFeeders('AET')"/>
+            <text x="400" y="643" class="bus-text" onclick="toggleBusFeeders('AET')">ASH EXTRACTION SWITCHGEAR (AET-A / B Sec)</text>
+
+            <path d="M 220 208 V 700" class="load-drop"/>
+            <circle cx="220" cy="710" r="9" class="svg-xfmr"/><circle cx="220" cy="720" r="9" class="svg-xfmr"/>
+            <path d="M 220 729 V 750" class="load-drop"/>
+
+            <rect x="90" y="750" width="620" height="18" class="svg-bus blue-bus" onclick="toggleBusFeeders('CTT')"/>
+            <text x="400" y="763" class="bus-text" onclick="toggleBusFeeders('CTT')">COOLING TOWER SWITCHGEAR (CT-A / B / C)</text>
+
+            <path d="M 250 208 V 820" class="load-drop"/>
+            <circle cx="250" cy="830" r="9" class="svg-xfmr"/><circle cx="250" cy="840" r="9" class="svg-xfmr"/>
+            <path d="M 250 849 V 860" class="load-drop"/>
+
+            <rect x="90" y="860" width="620" height="20" class="svg-bus blue-bus" onclick="toggleBusFeeders('ESP')"/>
+            <text x="400" y="874" class="bus-text" onclick="toggleBusFeeders('ESP')">ESP SWITCHGEAR TIERS (ESP A to F)</text>
+        </svg>
+    </div>
+
+    <div class="feeders-overlay" id="feedersModal">
+        <div class="feeders-panel">
+            <div class="panel-header">
+                <h3 id="modalBusTitle">Bus Feeders</h3>
+                <button class="close-btn" onclick="closeFeedersPanel()">&times;</button>
+            </div>
+            <div class="panel-body">
+                <div class="feeder-grid" id="feederGridContainer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

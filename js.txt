@@ -1,0 +1,92 @@
+const systemBusesData = {
+    'UA': [
+        { id: 'UA-F01', label: 'Incomer from UT-A Transformer' },
+        { id: 'UA-F02', label: 'Tie Breaker to Station Bus SA' },
+        { id: 'UA-F03', label: 'Feed to 12.5M Unit Substation UST-A' },
+        { id: 'UA-F04', label: 'Feed to 27M Unit Substation UST-C' },
+        { id: 'UA-F05', label: 'Ash Extraction Switchgear Supply A' }
+    ],
+    'UB': [
+        { id: 'UB-F01', label: 'Incomer from UT-B Transformer' },
+        { id: 'UB-F02', label: 'Tie Breaker to Station Bus SB' },
+        { id: 'UB-F03', label: 'Feed to 12.5M Unit Substation UST-B' },
+        { id: 'UB-F04', label: 'Feed to 27M Unit Substation UST-D' }
+    ],
+    'UAA-A': [
+        { id: 'UAA-A-F1', label: 'Incoming supply from UAT-A (16 MVA)' },
+        { id: 'UAA-A-F2', label: 'Primary Air Fan Boiler Motor 1A' },
+        { id: 'UAA-A-F3', label: 'Induced Draft Fan Motor 1A' }
+    ],
+    'UAA-B': [
+        { id: 'UAA-B-F1', label: 'Incoming supply from UAT-B (16 MVA)' },
+        { id: 'UAA-B-F2', label: 'Primary Air Fan Boiler Motor 1B' }
+    ],
+    'USS-A': [
+        { id: 'USSA-F1', label: 'Incomer 11/0.433KV via UST-A' },
+        { id: 'USSA-F2', label: 'Turbine MCC Sec-A Outfeed' },
+        { id: 'USSA-F3', label: 'Unit AC Distribution Board Board A' },
+        { id: 'USSA-F4', label: 'Emergency Diesel Gen Interlock (1500KVA)' }
+    ],
+    'USS-B': [
+        { id: 'USSB-F1', label: 'Incomer 11/0.433KV via UST-B' },
+        { id: 'USSB-F2', label: 'Turbine MCC Sec-B Outfeed' }
+    ],
+    'USS-C': [
+        { id: 'USSC-F1', label: 'Incomer from Substation Xfmr UST-C' },
+        { id: 'USSC-F2', label: 'Boiler Auxiliary DC Board (BACDB)' }
+    ],
+    'USS-D': [
+        { id: 'USSD-F1', label: 'Incomer from Substation Xfmr UST-D' }
+    ],
+    'AET': [
+        { id: 'AET-A-01', label: 'Ash Extraction System Sec-A Feed' },
+        { id: 'AET-B-01', label: 'Ash Extraction System Sec-B Feed' },
+        { id: 'AET-MCC', label: 'Boiler Ash Handling MCC Feed' }
+    ],
+    'CTT': [
+        { id: 'CT-PUMP-A', label: 'Cooling Tower Fan Motor A' },
+        { id: 'CT-PUMP-B', label: 'Cooling Tower Fan Motor B' },
+        { id: 'CT-PUMP-C', label: 'Standby Cooling Water Circulator C' }
+    ],
+    'ESP': [
+        { id: 'ESP-CH-A', label: 'Electrostatic Precipitator Panel A' },
+        { id: 'ESP-CH-B', label: 'Electrostatic Precipitator Panel B' },
+        { id: 'ESP-CH-C', label: 'Electrostatic Precipitator Panel C' },
+        { id: 'ESP-CH-D', label: 'Electrostatic Precipitator Panel D' },
+        { id: 'ESP-CH-E', label: 'Electrostatic Precipitator Panel E' },
+        { id: 'ESP-CH-F', label: 'Electrostatic Precipitator Panel F' }
+    ]
+};
+
+function toggleBusFeeders(busKey) {
+    const modal = document.getElementById('feedersModal');
+    const title = document.getElementById('modalBusTitle');
+    const grid = document.getElementById('feederGridContainer');
+    
+    grid.innerHTML = '';
+    const feeders = systemBusesData[busKey] || [];
+    title.textContent = `SWITCHGEAR CONFIGURATION: ${busKey}`;
+    
+    if (feeders.length === 0) {
+        grid.innerHTML = `<div class="feeder-item">No dynamic load circuits logged for this tier.</div>`;
+    } else {
+        feeders.forEach(f => {
+            const item = document.createElement('div');
+            item.className = 'feeder-item';
+            item.innerHTML = `<span>${f.label}</span><span class="tag">${f.id}</span>`;
+            grid.appendChild(item);
+        });
+    }
+    modal.classList.add('active');
+}
+
+function closeFeedersPanel() {
+    document.getElementById('feedersModal').classList.remove('active');
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('feedersModal');
+    if (event.target === modal) {
+        closeFeedersPanel();
+    }
+}
